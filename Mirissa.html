@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mirissa Developments — Compound Mirissa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#c9a96e;--gold-light:#e8d5b0;--gold-dark:#a8895c;--dark:#0a0a0f;--dark-2:#12121a;--dark-3:#1a1a25;--gray:#86868b;--gray-light:#d2d2d7;--white:#fff;--radius:20px;--radius-sm:12px;--transition:.4s cubic-bezier(.4,0,.2,1)}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Tajawal','Cairo',sans-serif;background:var(--dark);color:var(--gray-light);overflow-x:hidden;line-height:1.7}
+a{text-decoration:none;color:inherit}ul{list-style:none}img{max-width:100%}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,15,.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:var(--transition)}
+#navbar.scrolled{background:rgba(10,10,15,.95)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-mark{font-family:'Cairo',sans-serif;font-weight:900;font-size:24px;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.logo-text{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gray-light)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--gray-light);transition:var(--transition);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;right:0;width:0;height:2px;background:var(--gold);transition:var(--transition)}
+.nav-links a:hover{color:var(--white)}.nav-links a:hover::after{width:100%}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
+.nav-toggle span{width:24px;height:2px;background:var(--white);transition:var(--transition)}
+.lang-toggle{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:700;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.3);color:var(--gold-light);cursor:pointer;transition:var(--transition);font-family:inherit}
+.lang-toggle:hover{background:rgba(201,169,110,.2)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(201,169,110,.15),transparent 50%),radial-gradient(ellipse at 80% 30%,rgba(15,52,96,.3),transparent 50%),linear-gradient(135deg,#0a0a0f 0%,#12121a 50%,#0a0a0f 100%)}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,rgba(201,169,110,.08),transparent 60%)}
+.hero-content{position:relative;z-index:2;padding:0 24px;max-width:900px}
+.hero-badge{display:inline-block;padding:8px 20px;border-radius:100px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.3);color:var(--gold-light);font-size:13px;font-weight:600;letter-spacing:1px;margin-bottom:32px}
+.hero-title{font-family:'Cairo',sans-serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;line-height:1.1;margin-bottom:24px;background:linear-gradient(180deg,#fff 0%,#d2d2d7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title span{display:block}
+.hero-subtitle{font-size:clamp(1rem,2vw,1.3rem);color:var(--gray-light);font-weight:300;margin-bottom:40px;line-height:1.8}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700;cursor:pointer;transition:var(--transition);border:none}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,169,110,.3)}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.15)}.btn-ghost:hover{background:rgba(255,255,255,.12)}
+.btn-ghost-light{background:rgba(255,255,255,.1);color:var(--white);border:1px solid rgba(255,255,255,.2)}.btn-ghost-light:hover{background:rgba(255,255,255,.2)}
+.btn-lg{padding:18px 40px;font-size:16px}
+.hero-stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.hstat{display:flex;flex-direction:column;align-items:center;gap:4px}
+.hstat-num{font-family:'Cairo',sans-serif;font-size:2.2rem;font-weight:800;color:var(--gold-light)}
+.hstat-label{font-size:13px;color:var(--gray);font-weight:500}
+.scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);width:30px;height:50px;border:2px solid rgba(255,255,255,.2);border-radius:100px;display:flex;justify-content:center;padding-top:10px}
+.scroll-indicator span{width:4px;height:8px;background:var(--gold);border-radius:100px;animation:scrollDown 1.5s infinite}
+@keyframes scrollDown{0%{opacity:0;transform:translateY(0)}50%{opacity:1}100%{opacity:0;transform:translateY(15px)}}
+.reveal{opacity:0;animation:revealUp .8s forwards}
+@keyframes revealUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.section{padding:100px 0;position:relative}
+.section-head{margin-bottom:60px}.section-head.center{text-align:center}
+.section-eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-eyebrow.light{color:var(--gold-light)}
+.section-title{font-family:'Cairo',sans-serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.2;color:var(--white)}
+.section-desc{font-size:1.1rem;color:var(--gray);margin-top:16px;max-width:600px}
+.section-head.center .section-desc{margin-left:auto;margin-right:auto}
+.about{background:var(--dark-2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.about-text .about-lead{font-size:1.3rem;color:var(--white);font-weight:500;margin-bottom:20px;line-height:1.8}
+.about-text p{color:var(--gray-light);font-size:1.05rem;margin-bottom:16px}
+.about-values{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.value-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:28px;transition:var(--transition)}
+.value-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.value-icon{font-size:28px;margin-bottom:12px;color:var(--gold)}
+.value-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--white)}.value-card p{font-size:.9rem;color:var(--gray)}
+.board-section{margin-top:80px}
+.board-title{font-family:'Cairo',sans-serif;font-size:1.6rem;font-weight:700;text-align:center;margin-bottom:40px;color:var(--white)}
+.board-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:600px;margin:0 auto}
+.board-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:32px;text-align:center;transition:var(--transition)}
+.board-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.board-avatar{width:120px;height:120px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:1.4rem;font-weight:800;color:var(--dark);font-family:'Cairo',sans-serif}
+.board-avatar img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.board-card h4{font-size:1.15rem;font-weight:700;color:var(--white);margin-bottom:4px}.board-card p{font-size:.9rem;color:var(--gray)}
+.mirissa-hero{position:relative;min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.mirissa-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(201,169,110,.2),transparent 60%),linear-gradient(135deg,#0f3460 0%,#16213e 50%,#0a0a0f 100%)}
+.mirissa-bg img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.mirissa-overlay{position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,rgba(201,169,110,.1),transparent 50%)}
+.mirissa-content{position:relative;z-index:2;padding:0 24px}
+.mirissa-title{font-family:'Cairo',sans-serif;font-size:clamp(2.5rem,7vw,5rem);font-weight:900;margin:16px 0;background:linear-gradient(180deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.mirissa-tagline{font-size:clamp(1rem,2vw,1.4rem);color:var(--gray-light);font-weight:300;margin-bottom:40px}
+.mirissa-quick{display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap}
+.mq-item{display:flex;flex-direction:column;align-items:center;gap:4px}
+.mq-num{font-family:'Cairo',sans-serif;font-size:2.5rem;font-weight:800;color:var(--gold-light)}.mq-label{font-size:14px;color:var(--gray)}
+.mq-divider{width:1px;height:50px;background:rgba(255,255,255,.1)}
+.gallery-section{background:var(--dark-2)}
+.gallery-tabs{display:flex;justify-content:center;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+.gallery-tab{padding:10px 24px;border-radius:100px;font-size:14px;font-weight:600;background:var(--dark-3);border:1px solid rgba(255,255,255,.08);color:var(--gray-light);cursor:pointer;transition:var(--transition);font-family:inherit}
+.gallery-tab.active,.gallery-tab:hover{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border-color:transparent}
+.gallery-panel{display:none}.gallery-panel.active{display:block;animation:fadeIn .5s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gallery-grid.single{grid-template-columns:1fr;max-width:700px;margin:0 auto}
+.gallery-item{border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;position:relative;background:#f5f5f7;min-height:200px}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:var(--transition);position:absolute;inset:0}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-item .gallery-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);opacity:0;transition:var(--transition);display:flex;align-items:center;justify-content:center;z-index:2}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay span{color:var(--white);font-size:14px;font-weight:600}
+.gallery-item.contain{background:#fff;min-height:auto;aspect-ratio:auto}
+.gallery-item.contain img{object-fit:contain;position:relative;height:auto}
+.gallery-item.contain:hover img{transform:scale(1.03)}
+.sub-head{text-align:center;margin:40px 0 20px}.sub-head:first-child{margin-top:0}
+.sub-head h3{font-family:'Cairo',sans-serif;font-size:1.3rem;font-weight:700;color:var(--gold-light)}.sub-head p{font-size:.9rem;color:var(--gray);margin-top:4px}
+.video-section{background:var(--dark)}
+.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.video-card{border-radius:var(--radius);overflow:hidden;background:var(--dark-3);border:1px solid rgba(255,255,255,.06)}
+.video-card iframe{width:100%;height:400px;border:none;display:block}
+.video-card .video-label{padding:16px;text-align:center;color:var(--gray-light);font-size:14px}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9999;display:none;align-items:center;justify-content:center;padding:40px}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90%;max-height:90vh;object-fit:contain;border-radius:12px;background:#fff}
+.lightbox-close{position:absolute;top:20px;left:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:var(--white);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lightbox-close:hover{background:rgba(255,255,255,.2)}
+.mirissa-details{background:var(--dark-2)}
+.detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.detail-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:28px;transition:var(--transition)}
+.detail-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.detail-icon{font-size:32px;margin-bottom:14px}
+.detail-card h3{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:8px}.detail-card p{font-size:.9rem;color:var(--gray-light)}
+.unit-types{background:var(--dark)}
+.units-tabs{display:flex;justify-content:center;gap:12px;margin-bottom:40px}
+.unit-tab{padding:12px 32px;border-radius:100px;font-size:15px;font-weight:600;background:var(--dark-3);border:1px solid rgba(255,255,255,.08);color:var(--gray-light);cursor:pointer;transition:var(--transition);font-family:inherit}
+.unit-tab.active,.unit-tab:hover{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);border-color:transparent}
+.unit-panel{display:none}.unit-panel.active{display:block;animation:fadeIn .5s}
+.unit-sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.unit-size-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:36px 20px;text-align:center;transition:var(--transition)}
+.unit-size-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.unit-size{font-family:'Cairo',sans-serif;font-size:2.5rem;font-weight:800;color:var(--gold-light);display:block}
+.unit-unit{font-size:1rem;color:var(--gray);display:block;margin-top:-4px}
+.unit-type{font-size:.85rem;color:var(--gray);display:inline-block;margin-top:8px;padding:4px 12px;border-radius:100px;background:rgba(201,169,110,.08)}
+.building-dist{margin-top:60px}
+.dist-title{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:700;text-align:center;margin-bottom:30px;color:var(--white)}
+.dist-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.dist-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:32px;text-align:center;transition:var(--transition)}
+.dist-card:hover{border-color:rgba(201,169,110,.3)}
+.dist-badge{display:inline-block;padding:6px 18px;border-radius:100px;font-size:13px;font-weight:600;color:var(--gold-light);background:rgba(201,169,110,.1);margin-bottom:16px}
+.dist-card h4{font-size:1rem;color:var(--gray);margin-bottom:16px;font-weight:500}
+.dist-numbers{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:16px}
+.dist-numbers span{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;color:var(--white);background:linear-gradient(135deg,var(--gold),var(--gold-dark));font-family:'Cairo',sans-serif}
+.dist-areas{font-size:.85rem;color:var(--gray);line-height:1.6}
+.garden-section{margin-top:40px}
+.garden-card{background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(15,52,96,.1));border:1px solid rgba(201,169,110,.2);border-radius:var(--radius);padding:40px;text-align:center}
+.garden-icon{font-size:40px;margin-bottom:16px}
+.garden-card h3{font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:16px}
+.garden-sizes{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px}
+.garden-sizes span{font-family:'Cairo',sans-serif;font-size:2rem;font-weight:800;color:var(--gold-light)}
+.garden-sep{color:var(--gray)!important;font-weight:300!important}.garden-card p{color:var(--gray);font-size:.95rem}
+.location-section{background:var(--dark-2)}
+.location-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.loc-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:28px;text-align:center;transition:var(--transition)}
+.loc-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-4px)}
+.loc-card.highlight{background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(15,52,96,.05));border-color:rgba(201,169,110,.2)}
+.loc-time{font-family:'Cairo',sans-serif;font-size:1.5rem;font-weight:800;color:var(--gold-light);margin-bottom:8px}
+.loc-name{font-size:1rem;color:var(--gray-light);font-weight:500}
+.services-section{background:var(--dark)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:32px;text-align:center;transition:var(--transition)}
+.service-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-6px)}
+.service-icon{font-size:36px;margin-bottom:16px}
+.service-card h3{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:8px}.service-card p{font-size:.9rem;color:var(--gray)}
+.pricing-section{background:var(--dark-2)}
+.price-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:60px}
+.price-main{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:40px;text-align:center;transition:var(--transition)}
+.price-main:hover{border-color:rgba(201,169,110,.3)}
+.price-main.garden{background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(15,52,96,.05));border-color:rgba(201,169,110,.2)}
+.price-label{font-size:14px;color:var(--gray);margin-bottom:16px;font-weight:500}
+.price-range{display:flex;align-items:baseline;justify-content:center;gap:12px;flex-wrap:wrap}
+.price-from,.price-to{font-family:'Cairo',sans-serif;font-size:2.5rem;font-weight:800;color:var(--gold-light)}
+.price-sep{font-size:1.5rem;color:var(--gray)}.price-cur{font-size:14px;color:var(--gray);font-weight:500}
+.plans-title{font-family:'Cairo',sans-serif;font-size:1.4rem;font-weight:700;text-align:center;margin-bottom:30px;color:var(--white)}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:40px}
+.plan-card{background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:36px;text-align:center;transition:var(--transition);position:relative}
+.plan-card:hover{border-color:rgba(201,169,110,.3);transform:translateY(-6px)}
+.plan-card.featured{border-color:var(--gold);background:linear-gradient(135deg,rgba(201,169,110,.08),var(--dark-3))}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 16px;border-radius:100px;font-size:12px;font-weight:600;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--dark);white-space:nowrap}
+.plan-down{font-family:'Cairo',sans-serif;font-size:3rem;font-weight:800;color:var(--gold-light)}
+.plan-years{font-size:1.1rem;font-weight:600;color:var(--white);margin:8px 0 12px}.plan-desc{font-size:.85rem;color:var(--gray)}
+.extra-info{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.info-pill{display:flex;align-items:center;gap:10px;padding:12px 24px;background:var(--dark-3);border:1px solid rgba(255,255,255,.06);border-radius:100px}
+.info-label{font-size:13px;color:var(--gray);font-weight:500}.info-val{font-size:13px;color:var(--gold-light);font-weight:600}
+.contact-section{background:var(--dark-2)}
+.contact-box{text-align:center;max-width:700px;margin:0 auto}
+.contact-title{font-family:'Cairo',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:var(--white);margin:16px 0}
+.contact-desc{font-size:1.1rem;color:var(--gray);margin-bottom:40px}
+.contact-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.contact-info p{font-size:1rem;color:var(--gray-light)}
+.footer{background:var(--dark);padding:60px 0 30px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-brand p{color:var(--gray);font-size:.95rem;margin-top:16px;max-width:300px}
+.footer-col h4{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:16px}
+.footer-col ul li{margin-bottom:10px}.footer-col ul li a{font-size:.9rem;color:var(--gray);transition:var(--transition)}.footer-col ul li a:hover{color:var(--gold-light)}
+.footer-bottom{text-align:center;padding-top:30px;border-top:1px solid rgba(255,255,255,.06)}.footer-bottom p{font-size:.85rem;color:var(--gray)}
+@media(max-width:900px){.nav-links{display:none;position:absolute;top:64px;right:0;left:0;background:rgba(10,10,15,.98);flex-direction:column;padding:20px;gap:16px;backdrop-filter:blur(20px)}.nav-links.open{display:flex}.nav-toggle{display:flex}.about-grid,.detail-grid,.unit-sizes,.location-grid,.services-grid,.plans-grid,.dist-grid,.price-cards{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr}.hero-stats{gap:24px}.mq-divider{display:none}.gallery-grid{grid-template-columns:1fr 1fr}.video-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.detail-grid,.unit-sizes,.location-grid,.services-grid,.plans-grid,.dist-grid,.price-cards,.about-values{grid-template-columns:1fr}.board-grid{grid-template-columns:1fr}.section{padding:60px 0}.hero-cta{flex-direction:column;align-items:center}.btn{width:100%;max-width:280px}.extra-info{flex-direction:column;align-items:stretch}.info-pill{justify-content:space-between}.gallery-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav id="navbar"><div class="nav-inner"><div class="nav-logo"><span class="logo-mark">Mirissa</span><span class="logo-text">DEVELOPMENTS</span></div><div class="nav-right"><ul class="nav-links"><li><a href="#hero" data-en="Home">الرئيسية</a></li><li><a href="#about" data-en="About">عن الشركة</a></li><li><a href="#mirissa">Compound Mirissa</a></li><li><a href="#gallery" data-en="Gallery">معرض الصور</a></li><li><a href="#pricing" data-en="Pricing">الأسعار</a></li><li><a href="#contact" data-en="Contact">تواصل</a></li></ul><button class="lang-toggle" onclick="toggleLang()" id="langBtn">EN</button><button class="nav-toggle" onclick="toggleMenu()"><span></span><span></span><span></span></button></div></div></nav>
+<section id="hero" class="hero"><div class="hero-bg"><div class="hero-overlay"></div></div><div class="hero-content"><div class="hero-badge" data-en="Established 2016">تأسست عام 2016</div><h1 class="hero-title"><span class="reveal" data-en="Building the Future">نبني المستقبل</span><span class="reveal" style="animation-delay:.15s" data-en="With a Touch of Creativity">بلمسة من الإبداع</span></h1><p class="hero-subtitle reveal" style="animation-delay:.3s" data-en="Mirissa Developments — Leading Real Estate Developer in Egypt&#10;Designing integrated communities combining luxury and innovation">Mirissa Developments — رائدة التطوير العقاري في مصر<br>نصمم مجتمعات متكاملة تجمع بين الفخامة والابتكار</p><div class="hero-cta reveal" style="animation-delay:.45s"><a href="#mirissa" class="btn btn-primary">Compound Mirissa</a><a href="#gallery" class="btn btn-ghost" data-en="Gallery">معرض الصور</a></div><div class="hero-stats reveal" style="animation-delay:.6s"><div class="hstat"><span class="hstat-num">10</span><span class="hstat-label" data-en="Years Experience">سنوات خبرة</span></div><div class="hstat"><span class="hstat-num">400</span><span class="hstat-label" data-en="Residential Units">وحدة سكنية</span></div><div class="hstat"><span class="hstat-num">13</span><span class="hstat-label" data-en="Buildings">عمارة</span></div><div class="hstat"><span class="hstat-num">8</span><span class="hstat-label" data-en="Acres">فدان</span></div></div></div><div class="scroll-indicator"><span></span></div></section>
+<section id="about" class="section about"><div class="container"><div class="section-head"><span class="section-eyebrow" data-en="About Us">عن الشركة</span><h2 class="section-title" data-en="A Legacy of Excellence Since 2016">إرث من التميز منذ 2016</h2></div><div class="about-grid"><div class="about-text"><p class="about-lead" data-en="Mirissa Developments is a leading real estate development company, established in 2016 with a clear vision: delivering integrated residential and commercial communities that combine modern design with high quality."><strong>Mirissa Developments</strong> شركة رائدة في التطوير العقاري، تأسست عام 2016 برؤية واضحة: تقديم مجتمعات سكنية وتجارية متكاملة تجمع بين التصميم العصري والجودة العالية.</p><p data-en="We believe that real estate is not just buildings, but a lifestyle. Therefore, we commit to the highest standards of construction and design, choosing strategic locations that connect you to everything you need — with flexible payment plans for everyone.">نؤمن أن العقار ليس مجرد مبانٍ، بل أسلوب حياة. لذلك نلتزم بأعلى معايير البناء والتصميم، ونختار مواقع استراتيجية تربطك بكل ما تحتاجه — مع أنظمة سداد مرنة تناسب الجميع.</p></div><div class="about-values"><div class="value-card"><div class="value-icon">◆</div><h3 data-en="Uncompromising Quality">جودة لا تتنازل</h3><p data-en="Highest construction and finishing standards">أعلى معايير البناء والتشطيب</p></div><div class="value-card"><div class="value-icon">◈</div><h3 data-en="Strategic Locations">مواقع استراتيجية</h3><p data-en="Direct connection to roads and axes">ربط مباشر بالطرق والمحاور</p></div><div class="value-card"><div class="value-icon">▲</div><h3 data-en="Flexible Payment Plans">أنظمة سداد مرنة</h3><p data-en="Up to 8 years interest-free">تصل إلى 8 سنوات بدون فوائد</p></div><div class="value-card"><div class="value-icon">●</div><h3 data-en="On-Time Delivery">تسليم في الموعد</h3><p data-en="Full commitment to delivery dates">التزام كامل بمواعيد الاستلام</p></div></div></div><div class="board-section"><h3 class="board-title" data-en="Company Leadership">قيادة الشركة</h3><div class="board-grid"><div class="board-card"><div class="board-avatar"><img src="https://drive.google.com/thumbnail?id=1TKa53A7HzP7M--y70QiuO56-cy5uR6cs&sz=w300" alt="م/ رفعت الضبع" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center">م/ ر</span></div><h4 data-en="Eng/ Refaat El-Dabaa">م/ رفعت الضبع</h4><p data-en="Chairman of the Board">رئيس مجلس الإدارة</p></div><div class="board-card"><div class="board-avatar"><img src="https://drive.google.com/thumbnail?id=1MXVBN_-VBbyzLKoUoaOE2FHhyh1ZOTgN&sz=w300" alt="م/ طه الناظر" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span style="display:none;width:100%;height:100%;align-items:center;justify-content:center">م/ ط</span></div><h4 data-en="Eng/ Taha El-Nazer">م/ طه الناظر</h4><p data-en="Chairman of the Board">رئيس مجلس الإدارة</p></div></div></div></div></section>
+<section id="mirissa" class="mirissa-hero"><div class="mirissa-bg"><img src="https://drive.google.com/thumbnail?id=1lBD-Dn3fMzPC1dXHEM1SFlrfkL3qfsHU&sz=w1920" alt="Compound Mirissa" onerror="this.style.display='none'"><div class="mirissa-overlay"></div></div><div class="mirissa-content"><span class="section-eyebrow light" data-en="Current Project">المشروع الحالي</span><h2 class="mirissa-title">Compound Mirissa</h2><p class="mirissa-tagline" data-en="Where Luxury Meets Smart Investment">حيث يلتقي الفخامة بالاستثمار الذكي</p><div class="mirissa-quick"><div class="mq-item"><span class="mq-num">8</span><span class="mq-label" data-en="Acres">فدان</span></div><div class="mq-divider"></div><div class="mq-item"><span class="mq-num">400</span><span class="mq-label" data-en="Units">شقة</span></div><div class="mq-divider"></div><div class="mq-item"><span class="mq-num">13</span><span class="mq-label" data-en="Buildings">عمارة</span></div><div class="mq-divider"></div><div class="mq-item"><span class="mq-num">G+5</span><span class="mq-label" data-en="Floors">طوابق</span></div></div></div></section>
+<section id="gallery" class="section gallery-section"><div class="container"><div class="section-head center"><span class="section-eyebrow" data-en="Photo & Video Gallery">معرض الصور والفيديوهات</span><h2 class="section-title" data-en="Explore Compound Mirissa in Detail">شاهد Compound Mirissa بالتفصيل</h2><p class="section-desc" data-en="Exclusive project images — Master Plan, Unit Layouts, and Location">صور حصرية للمشروع — الماستر بلان، تقسيمات الشقق، والموقع</p></div>
+<div class="gallery-tabs"><button class="gallery-tab active" data-gtab="project" data-en="Project Photos">صور المشروع</button><button class="gallery-tab" data-gtab="masterplan" data-en="Master Plan">الماستر بلان</button><button class="gallery-tab" data-gtab="units" data-en="Unit Layouts">تقسيم الشقق</button><button class="gallery-tab" data-gtab="location" data-en="Location">اللوكيشن</button></div>
+<div class="gallery-panel active" id="gpanel-project"><div class="gallery-grid">
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1lBD-Dn3fMzPC1dXHEM1SFlrfkL3qfsHU&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1lBD-Dn3fMzPC1dXHEM1SFlrfkL3qfsHU&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1_mZrogSd4uhj1DohSBSSsKnFMi3E3PFG&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1_mZrogSd4uhj1DohSBSSsKnFMi3E3PFG&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1dtDMb7NgZpL1aWsK5cUYej4C3a6KtPft&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1dtDMb7NgZpL1aWsK5cUYej4C3a6KtPft&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=17xSQgV-Fokdt2XyXXC2XjXKTJIjgmkWB&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=17xSQgV-Fokdt2XyXXC2XjXKTJIjgmkWB&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1qnb73tIclR5xXHuO85bEx-99e37YXr93&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1qnb73tIclR5xXHuO85bEx-99e37YXr93&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1fpE1a2SA8I6W6szG-6nI3t24DCd4cUc9&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1fpE1a2SA8I6W6szG-6nI3t24DCd4cUc9&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=14hMo6dxclUtKkspZbbGiEW-FwF0itbks&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=14hMo6dxclUtKkspZbbGiEW-FwF0itbks&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1ii0GJFIqBOga4m16qooTW2mGyrN1bZLX&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1ii0GJFIqBOga4m16qooTW2mGyrN1bZLX&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1__-bAkSKiVNpC5y-WkXB4eQ2fSA661zj&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1__-bAkSKiVNpC5y-WkXB4eQ2fSA661zj&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1wYhGOY7I7nwKIndTTfUmF86teTlnNUof&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1wYhGOY7I7nwKIndTTfUmF86teTlnNUof&sz=w800" alt="مشروع" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+</div></div>
+<div class="gallery-panel" id="gpanel-masterplan"><div class="gallery-grid single">
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1Z2PPRBCSXlvx8e5RsOkvmNGI1yiejEbr&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1Z2PPRBCSXlvx8e5RsOkvmNGI1yiejEbr&sz=w1000" alt="ماستر بلان" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+</div></div>
+<div class="gallery-panel" id="gpanel-units">
+<div class="sub-head"><h3 data-en="Ground Floor — 2 Bedrooms">أرضي غرفتين</h3><p data-en="Ground floor models — 2-bedroom apartments">النماذج الأرضية — شقق بغرفتين</p></div>
+<div class="gallery-grid">
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1KtME6750FcKrzrvzK1bV08_HNsz1V6nx&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1KtME6750FcKrzrvzK1bV08_HNsz1V6nx&sz=w1000" alt="أرضي غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1WrtzP_AR_vpBLVBeWCPWwaLvXRS3Y62i&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1WrtzP_AR_vpBLVBeWCPWwaLvXRS3Y62i&sz=w1000" alt="أرضي غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1wODHkafXOgOBGINbnopLzixPXpVKYees&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1wODHkafXOgOBGINbnopLzixPXpVKYees&sz=w1000" alt="أرضي غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1XUyj4m_qFpH0GBiR8f-xyF_QURzfhKyx&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1XUyj4m_qFpH0GBiR8f-xyF_QURzfhKyx&sz=w1000" alt="أرضي غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+</div>
+<div class="sub-head"><h3 data-en="Ground Floor — 3 Bedrooms">أرضي 3 غرف</h3><p data-en="Ground floor models — 3-bedroom apartments">النماذج الأرضية — شقق بثلاث غرف</p></div>
+<div class="gallery-grid">
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1nLV1xTP1WOMOTtXTWe9baMuJTPEb4NLE&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1nLV1xTP1WOMOTtXTWe9baMuJTPEb4NLE&sz=w1000" alt="أرضي 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1h-NXKbyzEo0bdxkpkkUza49UCeZ5H5md&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1h-NXKbyzEo0bdxkpkkUza49UCeZ5H5md&sz=w1000" alt="أرضي 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1eKFjieMxxIeNvzLvsRdHdVuATO6HyyZZ&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1eKFjieMxxIeNvzLvsRdHdVuATO6HyyZZ&sz=w1000" alt="أرضي 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1lCCl9LnH1aU_iAcjXZZoOFwkkx4AZFsw&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1lCCl9LnH1aU_iAcjXZZoOFwkkx4AZFsw&sz=w1000" alt="أرضي 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1C3s_gAn8KODKH9PmcF9wtJ4VJGKt9TOg&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1C3s_gAn8KODKH9PmcF9wtJ4VJGKt9TOg&sz=w1000" alt="أرضي 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+</div>
+<div class="sub-head"><h3 data-en="Repeated — 2 Bedrooms">مكرر غرفتين</h3><p data-en="Repeated models — 2-bedroom apartments">النماذج المكررة — شقق بغرفتين</p></div>
+<div class="gallery-grid">
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1SqLXwwi5ZAQTahUVjsu-0tAsYZbj7knu&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1SqLXwwi5ZAQTahUVjsu-0tAsYZbj7knu&sz=w1000" alt="مكرر غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1fyk6CSv0trFahpvNSO2ba2cMixKLGl4h&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1fyk6CSv0trFahpvNSO2ba2cMixKLGl4h&sz=w1000" alt="مكرر غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1mY_wGXCfQhbHZoayzhUI7J7qw9HvahOI&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1mY_wGXCfQhbHZoayzhUI7J7qw9HvahOI&sz=w1000" alt="مكرر غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1F5iWjOoJZu66WqUNLyr-L8JioZhGBy83&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1F5iWjOoJZu66WqUNLyr-L8JioZhGBy83&sz=w1000" alt="مكرر غرفتين" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+</div>
+<div class="sub-head"><h3 data-en="Repeated — 3 Bedrooms">مكرر 3 غرف</h3><p data-en="Repeated models — 3-bedroom apartments">النماذج المكررة — شقق بثلاث غرف</p></div>
+<div class="gallery-grid">
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1xKIPtXkeuC0eieb6aUzmY2ULpJqOviqU&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1xKIPtXkeuC0eieb6aUzmY2ULpJqOviqU&sz=w1000" alt="مكرر 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=15_BAbAZtB8UJcxGOipo2Xn2JxxPxZikF&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=15_BAbAZtB8UJcxGOipo2Xn2JxxPxZikF&sz=w1000" alt="مكرر 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1-L00w8oGKVQpCC5CPqnu2LekV78GTXmU&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1-L00w8oGKVQpCC5CPqnu2LekV78GTXmU&sz=w1000" alt="مكرر 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+<div class="gallery-item contain" onclick="openLightbox('https://drive.google.com/thumbnail?id=1DlXl7t_W3VhwGMO_I4etteEktCyldWld&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1DlXl7t_W3VhwGMO_I4etteEktCyldWld&sz=w1000" alt="مكرر 3 غرف" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+</div>
+</div>
+<div class="gallery-panel" id="gpanel-location"><div class="gallery-grid single">
+<div class="gallery-item" onclick="openLightbox('https://drive.google.com/thumbnail?id=1k4V3YnUu0YGZaZKCSOAicRsI6gIya1_y&sz=w1920')"><img src="https://drive.google.com/thumbnail?id=1k4V3YnUu0YGZaZKCSOAicRsI6gIya1_y&sz=w800" alt="لوكيشن" onerror="this.parentElement.style.display='none'"><div class="gallery-overlay"><span data-en="Click to enlarge">اضغط للتكبير</span></div></div>
+</div></div>
+</div></section>
+<section class="section video-section"><div class="container"><div class="section-head center"><span class="section-eyebrow" data-en="Project Videos">فيديوهات المشروع</span><h2 class="section-title" data-en="Watch the Project in Video">شاهد المشروع بالفيديو</h2></div><div class="video-grid">
+<div class="video-card"><iframe src="https://drive.google.com/file/d/1a8OTbplorhPTe_YNUdellyQEA_WYpe9J/preview" width="100%" height="400" allow="autoplay" style="border:none"></iframe><div class="video-label" data-en="Video 1">فيديو 1</div></div>
+<div class="video-card"><iframe src="https://drive.google.com/file/d/1GKDUjIgjffRvTkinYBcifMVJFiz-uAUH/preview" width="100%" height="400" allow="autoplay" style="border:none"></iframe><div class="video-label" data-en="Video 2">فيديو 2</div></div>
+<div class="video-card"><iframe src="https://drive.google.com/file/d/12ndsOTF56HY7cF-fO52T9II1BBb32S70/preview" width="100%" height="400" allow="autoplay" style="border:none"></iframe><div class="video-label" data-en="Video 3">فيديو 3</div></div>
+<div class="video-card"><iframe src="https://drive.google.com/file/d/1noFK7usrsPEH2145sUBT198DWtKT12af/preview" width="100%" height="400" allow="autoplay" style="border:none"></iframe><div class="video-label" data-en="Video 4">فيديو 4</div></div>
+</div></div></section>
+<section class="section mirissa-details"><div class="container"><div class="section-head"><span class="section-eyebrow" data-en="Project Details">تفاصيل المشروع</span><h2 class="section-title" data-en="Everything You Need to Know">كل ما تحتاج معرفته</h2></div><div class="detail-grid">
+<div class="detail-card"><div class="detail-icon">📍</div><h3 data-en="Location">الموقع</h3><p data-en="New Obour City — Golden Square, on the 70th Axis, facing Beit Watan">مدينة العبور الجديدة — الجولدن سكوير، على محور السبعين أمام بيت الوطن</p></div>
+<div class="detail-card"><div class="detail-icon">📐</div><h3 data-en="Project Area">مساحة المشروع</h3><p>8 Acres / 33,600 m²</p></div>
+<div class="detail-card"><div class="detail-icon">🏗️</div><h3 data-en="Building Ratio">نسبة الإنشاءات (مباني)</h3><p>40% — 3.2 Acres / 13,440 m²</p></div>
+<div class="detail-card"><div class="detail-icon">🌳</div><h3 data-en="Services Ratio">نسبة الإنشاءات (خدمات)</h3><p>75% — 4.8 Acres / 20,160 m²</p></div>
+<div class="detail-card"><div class="detail-icon">🏠</div><h3 data-en="Number of Units">عدد الشقق</h3><p data-en="400 Residential Units">400 شقة سكنية</p></div>
+<div class="detail-card"><div class="detail-icon">🏢</div><h3 data-en="Number of Buildings">عدد العمارات</h3><p data-en="13 Buildings">13 عمارة</p></div>
+<div class="detail-card"><div class="detail-icon">🅿️</div><h3 data-en="Building Specs">تفصيل العمارة</h3><p data-en="Underground Parking — 2 Elevators — G+5">أندر جراوند بركنج — مصعدان — G+5</p></div>
+<div class="detail-card"><div class="detail-icon">📦</div><h3 data-en="Delivery Status">حالة الاستلام</h3><p data-en="Semi-finished — within 2 to 3 years">نصف تشطيب — خلال 2 إلى 3 سنوات</p></div>
+</div></div></section>
+<section class="section unit-types"><div class="container"><div class="section-head center"><span class="section-eyebrow" data-en="Residential Models">النماذج السكنية</span><h2 class="section-title" data-en="Choose Your Ideal Space">اختر مساحتك المثالية</h2><p class="section-desc" data-en="Variety of spaces to suit all your needs">تنوع في المساحات يناسب كل احتياجاتك</p></div>
+<div class="units-tabs"><button class="unit-tab active" data-tab="two" data-en="2-Bedroom Units">شقق غرفتين</button><button class="unit-tab" data-tab="three" data-en="3-Bedroom Units">شقق 3 غرف</button></div>
+<div class="units-content">
+<div class="unit-panel active" id="panel-two"><div class="unit-sizes"><div class="unit-size-card"><span class="unit-size">114</span><span class="unit-unit">m²</span><span class="unit-type" data-en="2 Bedrooms">غرفتين</span></div><div class="unit-size-card"><span class="unit-size">117</span><span class="unit-unit">m²</span><span class="unit-type" data-en="2 Bedrooms">غرفتين</span></div><div class="unit-size-card"><span class="unit-size">130</span><span class="unit-unit">m²</span><span class="unit-type" data-en="2 Bedrooms">غرفتين</span></div><div class="unit-size-card"><span class="unit-size">132</span><span class="unit-unit">m²</span><span class="unit-type" data-en="2 Bedrooms">غرفتين</span></div></div></div>
+<div class="unit-panel" id="panel-three"><div class="unit-sizes"><div class="unit-size-card"><span class="unit-size">148</span><span class="unit-unit">m²</span><span class="unit-type" data-en="3 Bedrooms">3 غرف</span></div><div class="unit-size-card"><span class="unit-size">151</span><span class="unit-unit">m²</span><span class="unit-type" data-en="3 Bedrooms">3 غرف</span></div><div class="unit-size-card"><span class="unit-size">158</span><span class="unit-unit">m²</span><span class="unit-type" data-en="3 Bedrooms">3 غرف</span></div><div class="unit-size-card"><span class="unit-size">175</span><span class="unit-unit">m²</span><span class="unit-type" data-en="3 Bedrooms">3 غرف</span></div></div></div>
+</div>
+<div class="building-dist"><h3 class="dist-title" data-en="Unit Distribution by Building">توزيع الشقق على العمارات</h3><div class="dist-grid"><div class="dist-card"><span class="dist-badge" data-en="5 Units / Floor">5 شقق / دور</span><h4 data-en="Buildings">العمارات</h4><div class="dist-numbers"><span>4</span><span>10</span><span>12</span><span>13</span></div><p class="dist-areas" data-en="Areas: 114m² — 132m² — 175m²">المساحات: 114م² — 132م² — 175م²</p></div><div class="dist-card"><span class="dist-badge" data-en="6 Units / Floor">6 شقق / دور</span><h4 data-en="Buildings">العمارات</h4><div class="dist-numbers"><span>1</span><span>2</span><span>3</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>11</span></div><p class="dist-areas" data-en="Areas: 117m² — 130m² — 148m² — 151m² — 158m²">المساحات: 117م² — 130م² — 148م² — 151م² — 158م²</p></div></div></div>
+<div class="garden-section"><div class="garden-card"><div class="garden-icon">🌿</div><h3 data-en="Garden Areas">مساحات الجاردن</h3><div class="garden-sizes"><span>48 m²</span><span class="garden-sep">—</span><span>157 m²</span></div><p data-en="Private gardens giving you your own green space">حدائق خاصة تمنحك مساحة خضراء خاصة بك</p></div></div>
+</div></section>
+<section id="location" class="section location-section"><div class="container"><div class="section-head center"><span class="section-eyebrow" data-en="Prime Location">الموقع المميز</span><h2 class="section-title" data-en="In the Heart of New Obour">في قلب العبور الجديدة</h2><p class="section-desc" data-en="Strategic location connecting you to everything in minutes">موقع استراتيجي يربطك بكل ما تحتاجه في دقائق</p></div><div class="location-grid">
+<div class="loc-card"><div class="loc-time" data-en="5 min">5 دقائق</div><div class="loc-name" data-en="Belbeis Road">طريق بلبيس</div></div><div class="loc-card"><div class="loc-time" data-en="5 min">5 دقائق</div><div class="loc-name" data-en="Middle Ring Road">الدائري الأوسطي</div></div><div class="loc-card"><div class="loc-time" data-en="5 min">5 دقائق</div><div class="loc-name" data-en="Regional Ring Road">الدائري الإقليمي</div></div><div class="loc-card"><div class="loc-time" data-en="10 min">10 دقائق</div><div class="loc-name" data-en="Cairo-Ismailia Road">طريق مصر إسماعيلية</div></div><div class="loc-card"><div class="loc-time" data-en="10 min">10 دقائق</div><div class="loc-name" data-en="Carrefour Obour">كرفور العبور</div></div><div class="loc-card highlight"><div class="loc-time" data-en="Next to">بجوار</div><div class="loc-name" data-en="New Obour Authority">جهاز العبور الجديدة</div></div><div class="loc-card highlight"><div class="loc-time" data-en="Facing">أمام</div><div class="loc-name" data-en="Beit Watan Villas">فلل بيت الوطن مباشرةً</div></div><div class="loc-card"><div class="loc-time" data-en="Nearby">قريب</div><div class="loc-name" data-en="Creative Mall">مول كرييتف</div></div><div class="loc-card"><div class="loc-time" data-en="Nearby">قريب</div><div class="loc-name" data-en="Obour General Hospital">مستشفى العبور العام</div></div>
+</div></div></section>
+<section class="section services-section"><div class="container"><div class="section-head center"><span class="section-eyebrow" data-en="Services & Amenities">الخدمات والمرافق</span><h2 class="section-title" data-en="An Integrated Community with Unmatched Services">مجتمع متكامل بخدمات لا مثيل لها</h2></div><div class="services-grid">
+<div class="service-card"><div class="service-icon">🏬</div><h3 data-en="Commercial Mall">مول تجاري</h3><p data-en="On 2,000 m² area">على مساحة 2,000 م²</p></div><div class="service-card"><div class="service-icon">🌳</div><h3 data-en="Green Spaces">مساحات خضراء</h3><p data-en="Wide landscapes and gardens">لاند سكيب واسعة وحدائق غناء</p></div><div class="service-card"><div class="service-icon">🧸</div><h3 data-en="Kids Area">Kids Area</h3><p data-en="Dedicated children's area">منطقة مخصصة للأطفال</p></div><div class="service-card"><div class="service-icon">🛡️</div><h3 data-en="24/7 Security">أمن 24 ساعة</h3><p data-en="Round-the-clock guarding">حراسة على مدار الساعة</p></div><div class="service-card"><div class="service-icon">🚗</div><h3 data-en="Parking">مواقف سيارات</h3><p data-en="Private parking for each building">مواقف خاصة لكل عمارة</p></div><div class="service-card"><div class="service-icon">🎉</div><h3 data-en="Recreation Areas">مناطق ترفيهية</h3><p data-en="Social and entertainment areas">مناطق اجتماعية وترفيهية</p></div><div class="service-card"><div class="service-icon">🏃</div><h3 data-en="Running & Cycling Tracks">تراكات جري وعجل</h3><p data-en="Dedicated sports tracks">مسارات مخصصة للرياضة</p></div><div class="service-card"><div class="service-icon">📹</div><h3 data-en="Smart Cameras">كاميرات ذكية</h3><p data-en="Full compound coverage">تغطية كاملة للكمبوند</p></div><div class="service-card"><div class="service-icon">🔐</div><h3 data-en="Smart Gates">بوابات سمارت</h3><p data-en="Smart and secure entry system">نظام دخول ذكي وآمن</p></div>
+</div></div></section>
+<section id="pricing" class="section pricing-section"><div class="container"><div class="section-head center"><span class="section-eyebrow" data-en="Prices & Payment Plans">الأسعار وأنظمة السداد</span><h2 class="section-title" data-en="Smart Investment with Guaranteed Returns">استثمار ذكي بعوائد مضمونة</h2></div><div class="price-cards"><div class="price-main"><div class="price-label" data-en="Residential Price per m²">سعر المتر السكني</div><div class="price-range"><span class="price-from">21,300</span><span class="price-sep">—</span><span class="price-to">25,000</span><span class="price-cur" data-en="EGP / m²">ج.م / م²</span></div></div><div class="price-main garden"><div class="price-label" data-en="Garden Price per m²">سعر متر الجاردن</div><div class="price-range"><span class="price-from">3,500</span><span class="price-sep">—</span><span class="price-to">5,000</span><span class="price-cur" data-en="EGP / m²">ج.م / م²</span></div></div></div><h3 class="plans-title" data-en="Payment Plans">أنظمة السداد</h3><div class="plans-grid"><div class="plan-card"><div class="plan-down">10%</div><div class="plan-years" data-en="Over 6 Years">على 6 سنوات</div><div class="plan-desc" data-en="10% down payment, balance over 6 years">مقدم 10% والباقي على 6 سنوات</div></div><div class="plan-card featured"><div class="plan-badge" data-en="Most Popular">الأكثر طلباً</div><div class="plan-down">15%</div><div class="plan-years" data-en="Over 7 Years">على 7 سنوات</div><div class="plan-desc" data-en="15% down payment, balance over 7 years">مقدم 15% والباقي على 7 سنوات</div></div><div class="plan-card"><div class="plan-down">25%</div><div class="plan-years" data-en="Over 8 Years">على 8 سنوات</div><div class="plan-desc" data-en="25% down payment, balance over 8 years">مقدم 25% والباقي على 8 سنوات</div></div></div><div class="extra-info"><div class="info-pill"><span class="info-label" data-en="Maintenance">الصيانة</span><span class="info-val" data-en="8% — 6 months before delivery">8% قبل الاستلام بـ 6 شهور</span></div><div class="info-pill"><span class="info-label" data-en="Delivery">الاستلام</span><span class="info-val" data-en="2 — 3 Years">2 — 3 سنوات</span></div><div class="info-pill"><span class="info-label" data-en="Finishing">حالة التشطيب</span><span class="info-val" data-en="Semi-finished">نصف تشطيب</span></div><div class="info-pill"><span class="info-label" data-en="Loading Ratio">نسبة التحميل</span><span class="info-val">28%</span></div></div></div></section>
+<section id="contact" class="section contact-section"><div class="container"><div class="contact-box"><span class="section-eyebrow light" data-en="Contact Us">تواصل معنا</span><h2 class="contact-title" data-en="Start Your Journey with Mirissa Developments">ابدأ رحلتك مع Mirissa Developments</h2><p class="contact-desc" data-en="Book your tour now and discover the perfect investment opportunity">احجز معاينتك الآن واكتشف الفرصة الاستثمارية المثالية لك</p><div class="contact-cta"><a href="tel:+20" class="btn btn-primary btn-lg" data-en="Book Now">احجز الآن</a><a href="#gallery" class="btn btn-ghost-light btn-lg" data-en="Browse Photos">تصفح الصور</a></div><div class="contact-info"><p data-en="📍 New Obour City — Golden Square, 70th Axis">📍 مدينة العبور الجديدة — الجولدن سكوير، محور السبعين</p></div></div></div></section>
+<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><div class="nav-logo"><span class="logo-mark">Mirissa</span><span class="logo-text">DEVELOPMENTS</span></div><p data-en="Leading real estate developer since 2016 — Building the future with a touch of creativity">تطوير عقاري رائد منذ 2016 — نبني المستقبل بلمسة من الإبداع</p></div><div class="footer-col"><h4 data-en="Links">الروابط</h4><ul><li><a href="#mirissa">Compound Mirissa</a></li><li><a href="#gallery" data-en="Gallery">معرض الصور</a></li><li><a href="#pricing" data-en="Pricing">الأسعار</a></li><li><a href="#contact" data-en="Contact">تواصل معنا</a></li></ul></div><div class="footer-col"><h4 data-en="Company">الشركة</h4><ul><li><a href="#about" data-en="About">عن الشركة</a></li><li><a href="#location" data-en="Location">الموقع</a></li><li><a href="#pricing" data-en="Payment Plans">أنظمة السداد</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 Mirissa Developments — <span data-en="All Rights Reserved">جميع الحقوق محفوظة</span></p></div></div></footer>
+<div class="lightbox" id="lightbox"><button class="lightbox-close" onclick="closeLightbox()">✕</button><img src="" id="lightbox-img" alt=""></div>
+<script>
+let currentLang='ar';
+function toggleLang(){currentLang=currentLang==='ar'?'en':'ar';document.documentElement.lang=currentLang;document.documentElement.dir=currentLang==='ar'?'rtl':'ltr';document.getElementById('langBtn').textContent=currentLang==='ar'?'EN':'ع';document.querySelectorAll('[data-en]').forEach(el=>{if(currentLang==='en'){if(!el.dataset.ar)el.dataset.ar=el.textContent;el.textContent=el.dataset.en;}else{if(el.dataset.ar)el.textContent=el.dataset.ar;}});}
+const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{if(window.scrollY>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled')});
+function toggleMenu(){document.querySelector('.nav-links').classList.toggle('open')}
+document.querySelectorAll('.nav-links a').forEach(link=>{link.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open'))});
+document.querySelectorAll('.unit-tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.unit-panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');document.getElementById('panel-'+tab.dataset.tab).classList.add('active')})});
+document.querySelectorAll('.gallery-tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.gallery-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.gallery-panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');document.getElementById('gpanel-'+tab.dataset.gtab).classList.add('active')})});
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const target=document.querySelector(this.getAttribute('href'));if(target){e.preventDefault();const top=target.getBoundingClientRect().top+window.scrollY-64;window.scrollTo({top:top,behavior:'smooth'})}})});
+function openLightbox(src){const lb=document.getElementById('lightbox');document.getElementById('lightbox-img').src=src;lb.classList.add('active')}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active')}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox()});
+</script>
+</body>
+</html>
